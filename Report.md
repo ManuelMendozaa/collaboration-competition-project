@@ -1,32 +1,3 @@
-----------------  Global variables  ----------------
-Batch: 128
-Buffer max: 1.000.000
-Learning rate: 6.25e-5
-Epsilon: 1
-Epsilon decay: 1e-4
-Epsilon decay type: linear
-
-
-Raw agent:
-Min experience: batch
-Arq: [256, 256]
-No extensions
-Solved environment in 590 episodes
-Mean: 0.519
-Max: 2.70 (not last)
-
-
-Agent 1:
-Min experience: 4096 tuples
-No hyperparameter optimization
-Arq: [256, 256]
-No extensions
-Solved environment in 694 episodes
-Mean: 0.502
-Max: 2.60 (last)
-
-
-
 # Udacity Deep Reinforcement Learning Nanodegree
 ## Project 1: Navigation
 
@@ -40,7 +11,6 @@ For this project, it was implemented a simple DDPG model combine with an experie
 I selected this approach since actions only vary in one aspect and it is the direct to which the agent has to return the ball, and what started as a simple experiment turn out to be true, which is that this information has to be contain inside the space vector since this agent was able to solved the environment quite successfully.
 
 
-
 #### 2. Hyperparameters
 
 As in the 1st project, the hyperparameter selection was based on the recommendations from the [Rainbow paper](https://arxiv.org/pdf/1710.02298.pdf) by Deep Mind with slight modifications in some values.
@@ -49,6 +19,7 @@ As in the 1st project, the hyperparameter selection was based on the recommendat
   | ----------------------------------- | ------------- |
   | Replay buffer size                  | 1e6           |
   | Batch size                          | 128           |
+  | Minimum experience required         | 4096 tuples   |
   | Discount Factor γ                   | 0.99          |
   | Soft Update τ                       | 7e-3          |
   | Adam learning rate α                | 6.25e-5       |
@@ -56,7 +27,10 @@ As in the 1st project, the hyperparameter selection was based on the recommendat
   | Prioritization exponent ω           | 0.5           |
   | Weights correction β                | 0.4           |
   | Correction increase rate            | 7e-6          |
-  | Multi-step                          | 3             |
+  | Learning steps                      | 4             |
+  | Learning updates iterations         | 3             |
+  | Ornstein-Uhlenbeck factor θ         | 0.15          |
+  | Ornstein-Uhlenbeck factor σ         | 0.2           |
   | Number of episodes                  | 2000          |
   | Exploration ε                       | 1.0           |
   | Epsilon minimum                     | 0.01          |
@@ -86,7 +60,7 @@ Both the reward plot and the training graph are presented right below:
 
 | Training Graph                           | Reward Plot                            |
 | ---------------------------------------- | -------------------------------------- |
-| ![graph](images/mini_rainbow_graph.png)  | ![reward-plot](images/reward_plot.png) |
+| ![graph](images/final_agent.png)  | ![reward-plot](images/reward_plot.png) |
 
 Forward experiments reveal to me that this agent does not keep stable all the way through higher episodes, this could be caused by the fact that, as the agent gets closer to converge, the learning rate needs to decrease in order to avoid kickbacks in learning.
 
